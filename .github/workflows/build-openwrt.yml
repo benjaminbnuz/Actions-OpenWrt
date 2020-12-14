@@ -80,7 +80,7 @@ jobs:
         make defconfig
 
     - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
+      uses: benjaminbnuz/debugger-action@main
 
     - name: Download package
       run: |
