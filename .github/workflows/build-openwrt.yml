@@ -39,7 +39,7 @@ jobs:
       with: 
         repository: openwrt/openwrt
         ref: main
-        path: openwrt 
+        path: openwrt     
 
     - name: Initialization environment
       env:
@@ -51,14 +51,11 @@ jobs:
         # make4.1+ perl python3.7+ rsync subversion unzip which        
        
         sudo timedatectl set-timezone "$TZ"  
-    
 
-    - name: Load custom feeds
-      run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $DIY_P1_SH
-        cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH
+    - name: Add turbo acc
+      run: curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+
+   
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
@@ -66,13 +63,7 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: Load custom configuration
-      run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_P2_SH
-        cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P2_SH
+   
    
 
     - name: Download package
