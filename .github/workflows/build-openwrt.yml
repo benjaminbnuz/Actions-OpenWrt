@@ -53,7 +53,7 @@ jobs:
         sudo timedatectl set-timezone "$TZ"  
 
     - name: Add turbo acc
-      run: curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+      run: cd openwrt && curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
 
    
 
